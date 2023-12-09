@@ -1,8 +1,7 @@
 <template>
-    <div>
-        <input type="checkbox" @change="updateStatus()" v-model="item.is_completed" /> {{ item.title }}
-        <button @click="removeTodo()">Delete</button>
-        
+    <div class="pt-2">
+        <input type="checkbox" @change="updateStatus()" v-model="item.is_completed" class="text-[17px]"/> {{ item.title }}
+        <button @click="removeTodo()" class="bg-red-200 pb-[2px] px-[8px]"> <font-awesome-icon icon="trash" class="text-red-600 text-[11px]" /></button>        
     </div>
 
 </template>
@@ -19,6 +18,9 @@ export default {
             })
             .then(success => {
                 console.log('success hre ::',success)
+                if (success.status == true) {
+                    this.$emit('itemchnaged')
+                }
             })
             .catch(error => {
                 console.log('error hre ::',error)

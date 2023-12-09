@@ -1,7 +1,7 @@
 <template>
     
-    <div v-for="(item, index) in items" :key="index">
-        <list-item :item="item" v-on:itemchnaged="$emit(loadUpdatedList)" />
+    <div v-for="(item, index) in items" :key="index" class="">
+        <list-item :item="item" v-on:itemchnaged="$emit('loadUpdatedList')" />
     </div>
 
 </template>

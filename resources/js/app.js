@@ -15,8 +15,9 @@ library.add(faPlus, faTrash)
 const app = createApp({
     components: {
         Setup,
-        library
     }
 });
+
+app.component('font-awesome-icon', FontAwesomeIcon);
 
 app.mount("#app");

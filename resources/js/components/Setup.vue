@@ -1,9 +1,11 @@
 <template>
-    <h1 class="pt-[2rem] pb-[5rem]">Todo Application</h1>
+    <h1 class="pt-[2rem] pb-[3rem] text-center text-2xl font-bold">Todo Application</h1>
 
     <add-todo />
         
-    <list-all-todo :items="items" v-on:loadUpdatedList="getAllTodos()" />
+    <div class="flex flex-col items-center pt-5">
+        <list-all-todo :items="items" v-on:loadUpdatedList="getAllTodos()" />
+    </div>
    
 </template>
 
