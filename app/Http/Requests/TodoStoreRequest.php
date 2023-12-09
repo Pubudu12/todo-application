@@ -22,8 +22,7 @@ class TodoStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'=>'required|string',
-            'is_completed'=>'boolean'
+            'title'=>'required|string'
         ];
     }
 }

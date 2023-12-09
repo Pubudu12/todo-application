@@ -7,10 +7,11 @@
     <title>Document</title>
 
     @vite('resources/js/app.js')
+    @vite('resources/css/app.css')
 </head>
 <body>
-    <div id="app">
-        <example />
+    <div id="app" class="container mx-auto">
+        <setup />
     </div>
 </body>
 </html>
