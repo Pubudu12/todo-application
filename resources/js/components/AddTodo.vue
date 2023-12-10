@@ -7,10 +7,10 @@
         </span>
 
         <span class="py-2 bg-slate-100 ml-2 px-3">
-            <select name="" id="" class="bg-slate-100">
+            <select name="" id="" class="bg-slate-100" v-model="selectedOption" @change="emitTodoAdded">
                 <option value="all">All Todos</option>
-                <option value="archived">Archived Todos</option>
-                <option value="unarchived">Unarchived Todos</option>
+                <option value="1">Archived Todos</option>
+                <option value="0">Unarchived Todos</option>
             </select>
         </span>
     </div>
@@ -24,7 +24,8 @@ export default {
         return{
             item :{
                 title:''
-            }
+            },
+            selectedOption: 'all'
         }
    },
    methods: {
@@ -45,7 +46,10 @@ export default {
             .catch(error => {
                 console.log('error here!!',error)
             })        
-        }        
+        },
+        emitTodoAdded() {
+            this.$emit('todo-added', this.selectedOption);
+        },
    },
 }
 </script>

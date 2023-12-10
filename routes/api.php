@@ -23,4 +23,6 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('/todos', TodoController::class);
 
     Route::patch('/todo/update-status/{id}', [ TodoController::class, 'updateCompleteStatus' ]);
+
+    Route::get('/todo/get-filtered-todos/{id}/{page}', [ TodoController::class, 'updateCompleteStatus' ]);
 });

@@ -1,11 +1,13 @@
 <template>
     <h1 class="pt-[2rem] pb-[3rem] text-center text-2xl font-bold">Todo Application</h1>
 
-    <add-todo />
+    <add-todo @todo-added="getAllTodos" />
         
     <div class="flex flex-col items-center pt-5">
-        <list-all-todo :items="items" v-on:loadUpdatedList="getAllTodos()" />
+        <list-all-todo :items="items" v-on:reloadlist="getAllTodos()" />
     </div>
+
+    
    
 </template>
 
@@ -14,6 +16,7 @@ import AddTodo from './AddTodo.vue';
 import ListAllTodo from './ListAllTodo.vue'
 import { isProxy, toRaw, ref } from 'vue';
 import axios from 'axios';
+
 
 export default {
     components: {
@@ -26,9 +29,10 @@ export default {
         }
     },
     methods: {
-        getAllTodos(){
-            axios.get('api/v1/todos')
-            // console.log('newTodos : ',JSON.parse(JSON.stringify(this.items.data.data)))
+        getAllTodos(selectedOption, page = 1){
+            
+            axios.get('api/v1/todos?status='+selectedOption+'&page='+page+'&limit=10')
+
             .then(success => {
 
                 this.items = success.data.data
@@ -38,10 +42,10 @@ export default {
             .catch(error => {
                 console.log('error fetch',error)
             })
-        }
+        },
     },
     created(){
-        this.getAllTodos()
+        this.getAllTodos('all')
     }
 }
 </script>

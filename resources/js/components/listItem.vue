@@ -18,9 +18,9 @@ export default {
             })
             .then(success => {
                 console.log('success hre ::',success)
-                if (success.status == true) {
-                    this.$emit('itemchnaged')
-                }
+                // if (success.status == true) {
+                //     this.$emit('itemchnaged')
+                // }
             })
             .catch(error => {
                 console.log('error hre ::',error)

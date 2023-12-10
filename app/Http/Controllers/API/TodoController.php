@@ -8,15 +8,26 @@ use App\Http\Requests\TodoUpdateRequest;
 use App\Http\Resources\TodoResource;
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TodoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return array('status'=>true,'data'=>TodoResource::collection(Todo::all()));
+        $query = Todo::query();
+
+        // all tasks are filtered with archived status
+        if ($request->status != 'all') {
+            $query->where('is_completed', '=', $request->status);
+        }
+
+        // Paginate the results with giver per page amount
+        $todos = $query->paginate($request->limit, ['*'], 'page', $request->page);
+
+        return array('status'=>true,'data'=>TodoResource::collection($todos));
     }
 
     /**
@@ -88,5 +99,11 @@ class TodoController extends Controller
         $todoItem->update($input);
         // $todoItem->update($request->validated());
         return array('status'=>true, 'data'=>$todoItem);
+    }
+
+
+    public function fetchFilteredTodos(string $status, int $page)
+    {
+        return array('status'=>true,'data'=>TodoResource::collection(Todo::all()));
     }
 }
